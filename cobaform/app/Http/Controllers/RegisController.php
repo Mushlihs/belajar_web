@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\UserController;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -98,6 +99,7 @@ class RegisController extends Controller
             'PASSWORD' => $password,
             'EMAIL' => $email
         ]);
+        User::create([]);
 
         session(['success' => 'Register Berhasil, Silahkan Login']);
         return redirect('login');

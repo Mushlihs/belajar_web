@@ -8,30 +8,41 @@
     <link rel="stylesheet" href="css\bootstrap.css">
 </head>
 <body>
-<ul class="nav justify-content-center bg-warning">
-  <li class="nav-item">
-    <a class="nav-link active text-primary  ml-2" href="{{ url('/') }}"><b>Homepage</b>
-        </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link text-primary"> hai  
-      <?php if(Session::get('user') != ""){
-        echo "Hi ".Session::get('user');
 
-        }
-        else{
-          echo "Hi Anonim";
-        }?></a>
-  </li>
-  <li></li>
-  <?php if(Session::get('user') != ""){
-        echo '<li class="nav-item">
-        <a class="nav-link text-danger" href="'.url("/logout_usr").'">Log out</a>
-      </li>';
+  <nav class="navbar-expand-md navbar-light bg-white shadow-sm">
+    <ul class="nav bg-warning ms-auto">
+      <li class="nav-item">
+        <a class="nav-link active text-primary  ml-2" href="{{ url('/') }}"><b>Homepage</b>
+            </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-primary"> 
+          @if (Session::get('user') != "")
+            <p>Hi {{Session::get('user');}} </p>
+          @else
+            <p>Hi Anonim</p> 
+          @endif
+            
+      </li>
     
-        }
-        ?>
-</ul>
+      @if(Session::get('user') != "")
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{{ url("/logout_usr"); }}">Log out</a>
+        </li>
+      @else
+      <li>
+        <a class="nav-brand" href="{{ url('/login') }}">login</a>
+      </li>
+      <li>
+        <a class="nav-brand" href="{{ url('/register') }}">Buat akun</a>
+      </li> 
+      @endif
+    
+    </ul>
+
+  </nav>
+
+
 
 @yield("konten")
 
